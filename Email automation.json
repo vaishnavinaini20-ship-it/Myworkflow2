@@ -1,0 +1,146 @@
+{
+  "name": "Email automation",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -256,
+        -48
+      ],
+      "id": "76a988c7-27c3-4eb0-8600-f4bc2f8fff75",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "rubYYJlm9RetSjd5",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "filters": {
+          "labelIds": [
+            "INBOX",
+            "CATEGORY_UPDATES"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        48,
+        96
+      ],
+      "id": "1dfa8124-955b-403f-a2cb-671fe432bc3c",
+      "name": "Get many messages1",
+      "webhookId": "c29bfdfc-e5c5-430b-a02f-713d09fe0520",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "jZO0mmiMN9sS2ONX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "messageId": "={{json.id  }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        -128
+      ],
+      "id": "7133e177-3a6b-4623-9bf7-b4cdc211d325",
+      "name": "Delete a message",
+      "webhookId": "fb449c52-7038-4272-a760-ed74e04ef666",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "jZO0mmiMN9sS2ONX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 10,
+        "filters": {
+          "labelIds": [
+            "TRASH"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        32,
+        -128
+      ],
+      "id": "1e9a4c0e-0411-41b8-bdda-a36205f48b17",
+      "name": "Delete trash",
+      "webhookId": "390448c7-dfef-451d-aa00-ffe28ed5ead5",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "jZO0mmiMN9sS2ONX",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Delete trash",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get many messages1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete trash": {
+      "main": [
+        [
+          {
+            "node": "Delete a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "41a9f843-9a10-46a8-bbef-e7dfda140518",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "85d924869456ef78f45a4b3e9a58d70529d94274c8cd88d58867c6a5b8ff7e8e"
+  },
+  "id": "536rBF8808r88jFn",
+  "tags": []
+}
