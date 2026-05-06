@@ -1,0 +1,105 @@
+{
+  "name": "CRM workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "v1/get-record",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -288,
+        -80
+      ],
+      "id": "f1db1ca9-67c4-4ab7-bf3b-f77fe0fdfc8e",
+      "name": "Webhook",
+      "webhookId": "1dc8ed2c-6335-4074-bd4b-71e6b943f777"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1zYfFj8fUVJHVS03bqAjJ-a4I3hSXsEdQrsEBXAUTLs4",
+          "mode": "list",
+          "cachedResultName": "influencer ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zYfFj8fUVJHVS03bqAjJ-a4I3hSXsEdQrsEBXAUTLs4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zYfFj8fUVJHVS03bqAjJ-a4I3hSXsEdQrsEBXAUTLs4/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -80,
+        -80
+      ],
+      "id": "c2b8c3ca-18b6-4cf4-8b10-b30cf267f32b",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "wSlsvXeaZdhpiOVw",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        128,
+        -80
+      ],
+      "id": "f5d3bbc4-262e-4c9b-b791-b32327a5b5c3",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c49f9c6d-dde6-4c5d-b8ac-0e3f5a3cfeae",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "85d924869456ef78f45a4b3e9a58d70529d94274c8cd88d58867c6a5b8ff7e8e"
+  },
+  "id": "O3mJaUqO5rxEWbRv",
+  "tags": []
+}
