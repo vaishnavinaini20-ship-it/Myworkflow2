@@ -1,0 +1,55 @@
+{
+  "name": "CRM workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -128
+      ],
+      "id": "af08c447-6dfa-465a-899c-c6d95acc6308",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://naveennaini.app.n8n.cloud/webhook-test/v1/get-record",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -176,
+        -128
+      ],
+      "id": "1bc8f3be-9564-4751-a6f6-05810aae016f",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "a39513e4-9e89-4946-a05a-c34ebfc9373b",
+  "meta": {
+    "instanceId": "85d924869456ef78f45a4b3e9a58d70529d94274c8cd88d58867c6a5b8ff7e8e"
+  },
+  "id": "iS6snxS1zVObsV1W",
+  "tags": []
+}
